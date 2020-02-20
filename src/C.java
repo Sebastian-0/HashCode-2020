@@ -70,6 +70,7 @@ public class C {
         }
 
         libraries = result;
+        System.out.println("SCORE: " + score(libraries, nDays));
         printToFile();
     }
     
@@ -92,9 +93,7 @@ public class C {
         List<Library> libs = new ArrayList<>();
         for (Library library : libraries) {
             Library copy = new Library(library.id, library.signupTime, library.booksPerDay);
-            for (Book book : library.books) {
-                copy.books.add(new Book(book.id, book.score));
-            }
+            copy.books.addAll(library.books);
             libs.add(copy);
         }
         return libs;
@@ -140,15 +139,15 @@ public class C {
 
     public static void main(String[] args) throws IOException {
         C template = new C("f_libraries_of_the_world.txt");
-        template.solve();
+//        template.solve();
         template = new C("e_so_many_books.txt");
         template.solve();
 //        template = new C("d_tough_choices.txt");
 //        template.solve();
-        template = new C("c_incunabula.txt");
-        template.solve();
-        template = new C("a_example.txt");
-        template.solve();
+//        template = new C("c_incunabula.txt");
+//        template.solve();
+//        template = new C("a_example.txt");
+//        template.solve();
     }
 
 
