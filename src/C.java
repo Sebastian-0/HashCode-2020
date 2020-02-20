@@ -69,7 +69,7 @@ public class C {
                 System.out.println("Iteration " + i + " " + 100 * i / (double) nLibraries + "%");
             }
         }
-        System.out.println("Completed with score: " + score(result, nDays));
+        System.out.println("SCORE: " + score(libraries, nDays));
         printToFile(result);
     }
     
@@ -92,9 +92,7 @@ public class C {
         List<Library> libs = new ArrayList<>();
         for (Library library : libraries) {
             Library copy = new Library(library.id, library.signupTime, library.booksPerDay);
-            for (Book book : library.books) {
-                copy.books.add(new Book(book.id, book.score));
-            }
+            copy.books.addAll(library.books);
             libs.add(copy);
         }
         return libs;
