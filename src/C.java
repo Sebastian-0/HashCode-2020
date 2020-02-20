@@ -73,7 +73,7 @@ public class C {
         printToFile();
     }
     
-    public static long score(Collection<Library> libraries, int nDays) {
+    public long score(Collection<Library> libraries, int nDays) {
     	int day = 0;
     	Set<Book> books = new HashSet<>();
     	for (Library l : libraries) {
@@ -86,6 +86,18 @@ public class C {
     	return books.stream()
     			.mapToLong(b -> b.score)
     			.sum();
+    }
+
+    private List<Library> copyLibraries() {
+        List<Library> libs = new ArrayList<>();
+        for (Library library : libraries) {
+            Library copy = new Library(library.id, library.signupTime, library.booksPerDay);
+            for (Book book : library.books) {
+                copy.books.add(new Book(book.id, book.score));
+            }
+            libs.add(copy);
+        }
+        return libs;
     }
 
     public void printToSyso() throws IOException {
