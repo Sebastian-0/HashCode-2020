@@ -1,5 +1,15 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class C {
@@ -61,6 +71,21 @@ public class C {
 
         libraries = result;
         printToFile();
+    }
+    
+    public static long score(Collection<Library> libraries, int nDays) {
+    	int day = 0;
+    	Set<Book> books = new HashSet<>();
+    	for (Library l : libraries) {
+    		day += l.signupTime;
+    		int daysRemaining = Math.max(nDays - day, 0);
+    		l.books.stream()
+    				.limit(daysRemaining * l.booksPerDay)
+    				.forEach(b -> books.add(b));
+    	}
+    	return books.stream()
+    			.mapToLong(b -> b.score)
+    			.sum();
     }
 
     public void printToSyso() throws IOException {

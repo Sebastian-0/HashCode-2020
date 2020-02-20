@@ -1,8 +1,13 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import hashcode.D.Book;
+import hashcode.D.Library;
 
 public class Template {
     private String outputFile;
@@ -44,6 +49,21 @@ public class Template {
     public void solve() throws IOException {
 
         printToFile();
+    }
+    
+    public static long score(Collection<Library> libraries, int nDays) {
+    	int day = 0;
+    	Set<Book> books = new HashSet<>();
+    	for (Library l : libraries) {
+    		day += l.signupTime;
+    		int daysRemaining = Math.max(nDays - day, 0);
+    		l.books.stream()
+    				.limit(daysRemaining * l.booksPerDay)
+    				.forEach(b -> books.add(b));
+    	}
+    	return books.stream()
+    			.mapToLong(b -> b.score)
+    			.sum();
     }
 
     public void printToSyso() throws IOException {
