@@ -51,6 +51,7 @@ public class C {
     }
 
     public void solve() throws IOException {
+    	List<Library> libraries = copyLibraries();
         List<Library> result = new ArrayList<>();
         int time = nDays;
         for (int i = 0; i < nLibraries; i++) {
@@ -68,9 +69,8 @@ public class C {
                 System.out.println("Iteration " + i + " " + 100 * i / (double) nLibraries + "%");
             }
         }
-
-        libraries = result;
-        printToFile();
+        System.out.println("Completed with score: " + score(result, nDays));
+        printToFile(result);
     }
     
     public long score(Collection<Library> libraries, int nDays) {
@@ -104,7 +104,7 @@ public class C {
         printSolution(libraries, System.out);
     }
 
-    public void printToFile() throws IOException {
+    public void printToFile(List<Library> libraries) throws IOException {
         try (FileOutputStream out = new FileOutputStream(outputFile)) {
             printSolution(libraries, out);
         }
@@ -139,16 +139,11 @@ public class C {
     }
 
     public static void main(String[] args) throws IOException {
-        C template = new C("f_libraries_of_the_world.txt");
-        template.solve();
-        template = new C("e_so_many_books.txt");
-        template.solve();
-//        template = new C("d_tough_choices.txt");
-//        template.solve();
-        template = new C("c_incunabula.txt");
-        template.solve();
-        template = new C("a_example.txt");
-        template.solve();
+//        new C("f_libraries_of_the_world.txt").solve();
+//        new C("e_so_many_books.txt").solve();
+//        new C("d_tough_choices.txt").solve();
+        new C("c_incunabula.txt").solve();
+//        new C("a_example.txt").solve();
     }
 
 
