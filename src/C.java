@@ -69,7 +69,7 @@ public class C {
                 System.out.println("Iteration " + i + " " + 100 * i / (double) nLibraries + "%");
             }
         }
-        System.out.println("SCORE: " + score(libraries, nDays));
+        System.out.println("SCORE: " + score(result, nDays));
         printToFile(result);
     }
     
